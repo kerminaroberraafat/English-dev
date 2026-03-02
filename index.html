@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>English Speaking Plan · Month 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Lora:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Cairo:wght@400;600;700;800;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -48,6 +48,52 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   cursor: default;
+  transition: font-family 0.3s ease;
+}
+
+body.ar {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+}
+
+/* ── Language Toggle ── */
+.lang-toggle {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.5rem;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: white;
+  border: 2px solid rgba(180,140,240,0.2);
+  border-radius: 100px;
+  padding: 4px;
+  box-shadow: 0 4px 20px rgba(160,120,200,0.2);
+}
+
+body.ar .lang-toggle {
+  right: auto;
+  left: 1.5rem;
+}
+
+.lang-btn {
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text-mute);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Nunito', sans-serif;
+}
+.lang-btn.active {
+  background: linear-gradient(135deg, var(--pink), var(--lavender));
+  color: white;
+  box-shadow: 0 2px 12px rgba(180,140,240,0.35);
 }
 
 /* ── Custom cursor dot ── */
@@ -109,28 +155,21 @@ body {
   from { opacity:0; transform:translateY(36px) scale(0.98); }
   to   { opacity:1; transform:translateY(0)    scale(1); }
 }
-@keyframes popIn {
-  0%   { opacity:0; transform:scale(0.85); }
-  70%  { transform:scale(1.03); }
-  100% { opacity:1; transform:scale(1); }
-}
-@keyframes wiggle {
-  0%,100% { transform:rotate(-3deg); }
-  50%      { transform:rotate(3deg); }
-}
 @keyframes floatBadge {
   0%,100% { transform:translateY(0); }
   50%      { transform:translateY(-6px); }
-}
-@keyframes spin {
-  from { transform:rotate(0deg); }
-  to   { transform:rotate(360deg); }
 }
 
 .anim { opacity:0; animation: fadeUp 0.7s cubic-bezier(.16,1,.3,1) forwards; }
 .d1{animation-delay:.05s} .d2{animation-delay:.15s} .d3{animation-delay:.25s}
 .d4{animation-delay:.35s} .d5{animation-delay:.45s} .d6{animation-delay:.55s}
 .d7{animation-delay:.65s} .d8{animation-delay:.75s}
+
+/* ── Lang content visibility ── */
+.en-content { display: block; }
+.ar-content { display: none; }
+body.ar .en-content { display: none; }
+body.ar .ar-content { display: block; }
 
 /* ── Layout ── */
 .container { max-width:1180px; margin:0 auto; padding:0 2rem; position:relative; z-index:2; }
@@ -148,6 +187,13 @@ section { padding:5rem 0; }
   margin-bottom:1rem;
 }
 
+body.ar .chip {
+  font-family: 'Cairo', sans-serif;
+  letter-spacing: 0;
+  font-size: 0.8rem;
+  text-transform: none;
+}
+
 /* ── Section headings ── */
 .sec-title {
   font-family: 'Lora', serif;
@@ -157,6 +203,11 @@ section { padding:5rem 0; }
   line-height:1.2;
   margin-bottom:.5rem;
 }
+body.ar .sec-title {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  line-height: 1.4;
+}
 .sec-title span { color: var(--lav-deep); }
 .sec-sub {
   color: var(--text-soft);
@@ -164,6 +215,7 @@ section { padding:5rem 0; }
   margin-bottom:2.8rem;
   max-width:560px;
 }
+body.ar .sec-sub { font-size: 1rem; }
 
 /* ════════ HERO ════════ */
 #hero {
@@ -189,6 +241,14 @@ section { padding:5rem 0; }
   box-shadow: 0 4px 18px rgba(180,140,240,.18);
   animation: floatBadge 3s ease-in-out infinite;
 }
+
+body.ar .hero-badge {
+  font-family: 'Cairo', sans-serif;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+  text-transform: none;
+}
+
 .hero-badge .dot {
   width:7px; height:7px; border-radius:50%;
   background: var(--pink-deep);
@@ -207,6 +267,12 @@ section { padding:5rem 0; }
   color: var(--text);
   margin-bottom:1.2rem;
   letter-spacing:-.02em;
+}
+body.ar .hero-title {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: 0;
 }
 .hero-title .highlight {
   background: linear-gradient(135deg, var(--pink-deep), var(--lav-deep));
@@ -245,6 +311,13 @@ section { padding:5rem 0; }
   max-width:580px; margin:0 auto 2.5rem;
   line-height:1.8;
   font-family:'Lora',serif;
+}
+body.ar .hero-obj {
+  font-family: 'Cairo', sans-serif;
+  font-style: normal;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 2;
 }
 
 .hero-stats {
@@ -317,6 +390,10 @@ section { padding:5rem 0; }
   font-size:1.25rem; font-weight:600;
   color:var(--text); margin-bottom:.6rem;
 }
+body.ar .tool-name {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+}
 
 .tool-tag {
   display:inline-block;
@@ -324,11 +401,25 @@ section { padding:5rem 0; }
   padding:.2rem .65rem; border-radius:100px;
   margin-bottom:.75rem;
 }
+body.ar .tool-tag { letter-spacing: 0; text-transform: none; font-size: 0.78rem; }
+
 .elsa .tool-tag  { background:#ffe0f0; color:var(--pink-deep); }
 .chat .tool-tag  { background:#ede0ff; color:var(--lav-deep); }
 .youg .tool-tag  { background:#d0f4ff; color:var(--sky-deep); }
 
 .tool-desc { font-size:.88rem; color:var(--text-soft); line-height:1.7; }
+body.ar .tool-desc { font-size: 0.92rem; line-height: 1.9; }
+
+/* Arabic tool card note */
+.tool-note {
+  display: none;
+  font-size: 0.8rem;
+  color: var(--pink-deep);
+  font-style: italic;
+  margin-top: 0.6rem;
+  font-family: 'Cairo', sans-serif;
+}
+body.ar .tool-note { display: block; }
 
 /* ════════ WEEKLY ════════ */
 #weekly { background: var(--bg); }
@@ -350,11 +441,8 @@ section { padding:5rem 0; }
   cursor:default;
 }
 
-.week-card:hover {
-  transform: translateY(-8px) scale(1.01);
-}
+.week-card:hover { transform: translateY(-8px) scale(1.01); }
 
-/* Week colors */
 .wk1 { --wc:#f7a8c4; --wcd:#e8729a; --wcb:#fff0f5; }
 .wk2 { --wc:#c4b5fd; --wcd:#9174f0; --wcb:#f3f0ff; }
 .wk3 { --wc:#6ee7d0; --wcd:#2dbba0; --wcb:#edfaf7; }
@@ -364,60 +452,58 @@ section { padding:5rem 0; }
 .week-card:hover { box-shadow: 0 20px 52px color-mix(in srgb, var(--wc) 35%, transparent); border-color: var(--wc); }
 
 .week-deco {
-  position:absolute;
-  top:-30px; right:-30px;
-  width:130px; height:130px;
-  border-radius:50%;
+  position:absolute; top:-30px; right:-30px;
+  width:130px; height:130px; border-radius:50%;
   background: radial-gradient(circle, var(--wc), transparent 70%);
-  opacity:.35;
-  pointer-events:none;
+  opacity:.35; pointer-events:none;
 }
 .week-deco-2 {
-  position:absolute;
-  bottom:-20px; left:-20px;
-  width:80px; height:80px;
-  border-radius:50%;
-  background: var(--wc);
-  opacity:.12;
-  pointer-events:none;
+  position:absolute; bottom:-20px; left:-20px;
+  width:80px; height:80px; border-radius:50%;
+  background: var(--wc); opacity:.12; pointer-events:none;
 }
 
 .week-num-badge {
   display:inline-flex; align-items:center; gap:.4rem;
-  background:white;
-  border:2px solid var(--wc);
-  border-radius:100px;
-  padding:.25rem .85rem;
+  background:white; border:2px solid var(--wc);
+  border-radius:100px; padding:.25rem .85rem;
   font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--wcd);
-  margin-bottom:1rem;
+  color:var(--wcd); margin-bottom:1rem;
   box-shadow: 0 2px 10px color-mix(in srgb, var(--wc) 25%, transparent);
 }
+body.ar .week-num-badge { letter-spacing: 0; text-transform: none; font-size: 0.8rem; }
 
 .week-title {
   font-family:'Lora',serif;
   font-size:1.15rem; font-weight:600;
   color:var(--text); margin-bottom:1.3rem; line-height:1.35;
 }
+body.ar .week-title {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
 
 .week-ul { list-style:none; }
 .week-ul li {
-  font-size:.875rem;
-  color:var(--text-soft);
+  font-size:.875rem; color:var(--text-soft);
   padding:.38rem 0 .38rem 1.5rem;
   position:relative;
   border-bottom:1px dashed rgba(0,0,0,.06);
-  line-height:1.6;
-  transition: color .2s ease;
+  line-height:1.6; transition: color .2s ease;
+}
+body.ar .week-ul li {
+  padding:.38rem 1.5rem .38rem 0;
+  font-size: 0.92rem;
+  line-height: 1.8;
 }
 .week-ul li:last-child { border-bottom:none; }
 .week-ul li::before {
-  content:'✦';
-  position:absolute; left:0;
-  font-size:.65rem;
-  color:var(--wcd);
-  top:.55rem;
+  content:'✦'; position:absolute; left:0;
+  font-size:.65rem; color:var(--wcd); top:.55rem;
 }
+body.ar .week-ul li::before { left: auto; right: 0; }
 .week-card:hover .week-ul li { color: var(--text); }
 
 /* ════════ PRINCIPLES ════════ */
@@ -428,20 +514,15 @@ section { padding:5rem 0; }
 }
 
 .principles-grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1.2rem;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem;
 }
 
 .prin-card {
-  background:white;
-  border-radius:var(--radius-lg);
-  padding:2rem 1.6rem;
-  border:2px solid var(--border);
+  background:white; border-radius:var(--radius-lg);
+  padding:2rem 1.6rem; border:2px solid var(--border);
   text-align:center;
   transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease;
-  position:relative;
-  overflow:hidden;
+  position:relative; overflow:hidden;
 }
 .prin-card:hover { transform:translateY(-8px) rotate(.5deg); box-shadow:var(--shadow-lg); }
 
@@ -454,18 +535,25 @@ section { padding:5rem 0; }
 .prin-card:nth-child(4) .prin-emoji { animation-delay:1.5s; }
 
 .prin-num {
-  position:absolute;
-  top:14px; right:18px;
+  position:absolute; top:14px; right:18px;
   font-size:.7rem; font-weight:900; letter-spacing:.1em;
   color:var(--text-mute);
 }
+body.ar .prin-num { right: auto; left: 18px; }
 
 .prin-title {
   font-family:'Lora',serif;
   font-size:1rem; font-weight:600;
   color:var(--text); margin-bottom:.6rem; line-height:1.3;
 }
+body.ar .prin-title {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
 .prin-desc { font-size:.82rem; color:var(--text-soft); line-height:1.65; }
+body.ar .prin-desc { font-size: 0.85rem; line-height: 1.8; }
 
 .prin-card:nth-child(1) { border-top: 4px solid var(--pink); }
 .prin-card:nth-child(2) { border-top: 4px solid var(--lavender); }
@@ -476,23 +564,18 @@ section { padding:5rem 0; }
 #motivation {
   background: var(--bg);
   padding: 6rem 0;
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
 }
 
 .motiv-wrapper {
-  max-width: 820px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
+  max-width: 820px; margin: 0 auto;
+  position: relative; z-index: 2;
 }
 
 .motiv-card {
-  background: white;
-  border-radius: 36px;
+  background: white; border-radius: 36px;
   padding: 4rem 3.5rem;
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
   border: 2px solid rgba(247,168,196,0.25);
   box-shadow:
     0 0 0 8px rgba(247,168,196,0.06),
@@ -501,23 +584,14 @@ section { padding:5rem 0; }
   text-align: center;
 }
 
-/* Shimmer ring animation */
+body.ar .motiv-card { text-align: right; }
+
 .motiv-card::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 38px;
-  background: linear-gradient(135deg,
-    var(--pink) 0%,
-    var(--lavender) 25%,
-    var(--mint) 50%,
-    var(--sky) 75%,
-    var(--peach) 100%
-  );
+  content: ''; position: absolute; inset: -2px; border-radius: 38px;
+  background: linear-gradient(135deg, var(--pink) 0%, var(--lavender) 25%, var(--mint) 50%, var(--sky) 75%, var(--peach) 100%);
   background-size: 300% 300%;
   animation: borderShimmer 5s linear infinite;
-  z-index: -1;
-  opacity: 0.5;
+  z-index: -1; opacity: 0.5;
 }
 @keyframes borderShimmer {
   0%   { background-position: 0% 50%; }
@@ -525,204 +599,153 @@ section { padding:5rem 0; }
   100% { background-position: 0% 50%; }
 }
 
-/* Decorative blob inside card */
 .motiv-card::after {
-  content: '';
-  position: absolute;
+  content: ''; position: absolute;
   width: 300px; height: 300px;
   background: radial-gradient(circle, rgba(247,168,196,0.15), transparent 70%);
-  border-radius: 50%;
-  top: -80px; right: -80px;
-  pointer-events: none;
+  border-radius: 50%; top: -80px; right: -80px; pointer-events: none;
 }
 
 .motiv-blob-2 {
-  position: absolute;
-  width: 200px; height: 200px;
+  position: absolute; width: 200px; height: 200px;
   background: radial-gradient(circle, rgba(196,181,253,0.18), transparent 70%);
-  border-radius: 50%;
-  bottom: -60px; left: -40px;
-  pointer-events: none;
+  border-radius: 50%; bottom: -60px; left: -40px; pointer-events: none;
 }
 
-/* Floating hearts */
 .hearts-row {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1.8rem;
+  display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.8rem;
 }
-.heart {
-  font-size: 1.3rem;
-  animation: heartBeat 2s ease-in-out infinite;
-}
-.heart:nth-child(1) { animation-delay: 0s; }
-.heart:nth-child(2) { animation-delay: 0.3s; }
-.heart:nth-child(3) { animation-delay: 0.6s; }
-.heart:nth-child(4) { animation-delay: 0.9s; }
-.heart:nth-child(5) { animation-delay: 1.2s; }
+body.ar .hearts-row { justify-content: flex-start; }
+
+.heart { font-size: 1.3rem; animation: heartBeat 2s ease-in-out infinite; }
+.heart:nth-child(1){animation-delay:0s}.heart:nth-child(2){animation-delay:.3s}
+.heart:nth-child(3){animation-delay:.6s}.heart:nth-child(4){animation-delay:.9s}
+.heart:nth-child(5){animation-delay:1.2s}
 @keyframes heartBeat {
-  0%,100% { transform: scale(1); }
-  40%      { transform: scale(1.3); }
-  60%      { transform: scale(1.1); }
+  0%,100%{transform:scale(1)} 40%{transform:scale(1.3)} 60%{transform:scale(1.1)}
 }
 
 .motiv-name {
   font-family: 'Lora', serif;
   font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 600;
-  font-style: italic;
-  line-height: 1.2;
-  margin-bottom: 2rem;
+  font-weight: 600; font-style: italic;
+  line-height: 1.2; margin-bottom: 2rem;
   background: linear-gradient(135deg, var(--pink-deep), var(--lav-deep), var(--sky-deep));
   background-size: 200% 200%;
   animation: nameGradient 4s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-@keyframes nameGradient {
-  0%,100% { background-position: 0% 50%; }
-  50%      { background-position: 100% 50%; }
+body.ar .motiv-name {
+  font-family: 'Cairo', sans-serif;
+  font-style: normal; font-weight: 900;
 }
 
-/* Separator line */
+@keyframes nameGradient {
+  0%,100%{background-position:0% 50%} 50%{background-position:100% 50%}
+}
+
 .motiv-sep {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
   margin-bottom: 2rem;
 }
-.motiv-sep-line {
-  flex: 1;
-  max-width: 80px;
-  height: 1.5px;
-  background: linear-gradient(90deg, transparent, var(--lavender));
-  border-radius: 100px;
-}
-.motiv-sep-line.right { background: linear-gradient(90deg, var(--lavender), transparent); }
-.motiv-sep-star { font-size: 0.9rem; animation: floatBadge 3s ease-in-out infinite; }
+body.ar .motiv-sep { justify-content: flex-start; }
 
-/* Paragraphs */
-.motiv-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 1.3rem;
-  position: relative;
-  z-index: 1;
+.motiv-sep-line {
+  flex:1; max-width:80px; height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--lavender)); border-radius:100px;
 }
+.motiv-sep-line.right { background:linear-gradient(90deg,var(--lavender),transparent); }
+.motiv-sep-star { font-size:.9rem; animation:floatBadge 3s ease-in-out infinite; }
+
+.motiv-lines { display:flex; flex-direction:column; gap:1.3rem; position:relative; z-index:1; }
+body.ar .motiv-lines { text-align: right; }
 
 .motiv-line {
   font-family: 'Lora', serif;
-  font-size: clamp(0.95rem, 1.8vw, 1.08rem);
-  font-style: italic;
-  color: var(--text-soft);
-  line-height: 1.9;
-  position: relative;
-  padding: 0.9rem 1.6rem;
-  border-radius: 16px;
-  background: transparent;
-  transition: background 0.3s ease, transform 0.3s ease;
+  font-size: clamp(.95rem,1.8vw,1.08rem);
+  font-style: italic; color: var(--text-soft);
+  line-height: 1.9; padding:.9rem 1.6rem;
+  border-radius: 16px; background: transparent;
+  transition: background .3s ease, transform .3s ease;
+}
+body.ar .motiv-line {
+  font-family: 'Cairo', sans-serif;
+  font-style: normal;
+  font-size: clamp(0.92rem,1.8vw,1rem);
+  line-height: 2;
 }
 .motiv-line:hover {
-  background: linear-gradient(135deg, rgba(247,168,196,0.07), rgba(196,181,253,0.07));
-  transform: scale(1.01);
-  color: var(--text);
+  background: linear-gradient(135deg, rgba(247,168,196,.07), rgba(196,181,253,.07));
+  transform: scale(1.01); color: var(--text);
 }
 
-/* Highlight words */
 .motiv-line .glow {
-  font-weight: 600;
-  font-style: normal;
+  font-weight: 600; font-style: normal;
   background: linear-gradient(135deg, var(--pink-deep), var(--lav-deep));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
 .motiv-closing {
-  margin-top: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1.5px dashed rgba(196,181,253,0.3);
-  position: relative;
-  z-index: 1;
+  margin-top: 2.5rem; padding-top: 2rem;
+  border-top: 1.5px dashed rgba(196,181,253,.3);
+  position: relative; z-index: 1;
 }
-.motiv-closing-text {
-  font-family: 'Lora', serif;
-  font-size: 1rem;
-  font-style: italic;
-  color: var(--text-mute);
-}
-.motiv-closing-text strong {
-  font-weight: 600;
-  color: var(--lav-deep);
-  font-style: normal;
-}
+body.ar .motiv-closing { text-align: right; }
 
-/* Floating sparkles around card */
-.sparkle {
-  position: absolute;
-  pointer-events: none;
-  font-size: 1.2rem;
-  animation: sparkleDrift 6s ease-in-out infinite;
-  opacity: 0.6;
-  z-index: 0;
+.motiv-closing-text {
+  font-family: 'Lora', serif; font-size: 1rem;
+  font-style: italic; color: var(--text-mute);
 }
-.sparkle:nth-child(1)  { top:  8%; left:  5%; animation-delay: 0s; }
-.sparkle:nth-child(2)  { top: 20%; right: 4%; animation-delay: 1s; }
-.sparkle:nth-child(3)  { top: 75%; left: 3%; animation-delay: 2s; }
-.sparkle:nth-child(4)  { bottom: 8%; right: 6%; animation-delay: 1.5s; }
-.sparkle:nth-child(5)  { top: 50%; left: 1%; animation-delay: 0.5s; }
+body.ar .motiv-closing-text {
+  font-family: 'Cairo', sans-serif;
+  font-style: normal; font-size: 1rem;
+  line-height: 1.9;
+}
+.motiv-closing-text strong { font-weight:600; color:var(--lav-deep); font-style:normal; }
+
+.sparkle {
+  position:absolute; pointer-events:none; font-size:1.2rem;
+  animation:sparkleDrift 6s ease-in-out infinite; opacity:.6; z-index:0;
+}
+.sparkle:nth-child(1){top:8%;left:5%;animation-delay:0s}
+.sparkle:nth-child(2){top:20%;right:4%;animation-delay:1s}
+.sparkle:nth-child(3){top:75%;left:3%;animation-delay:2s}
+.sparkle:nth-child(4){bottom:8%;right:6%;animation-delay:1.5s}
+.sparkle:nth-child(5){top:50%;left:1%;animation-delay:.5s}
 @keyframes sparkleDrift {
-  0%,100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-  50%      { transform: translateY(-14px) rotate(15deg); opacity: 1; }
+  0%,100%{transform:translateY(0) rotate(0deg);opacity:.6}
+  50%{transform:translateY(-14px) rotate(15deg);opacity:1}
 }
 
 /* ════════ FOOTER ════════ */
 footer {
-  background: white;
-  padding: 4rem 2rem;
-  text-align:center;
-  border-top: 2px solid var(--border);
+  background:white; padding:4rem 2rem;
+  text-align:center; border-top:2px solid var(--border);
   position:relative; overflow:hidden;
 }
 
 .footer-stars {
-  font-size:1.1rem;
-  letter-spacing:.5rem;
-  color:var(--lavender);
-  display:block;
-  margin-bottom:1rem;
-  animation: floatBadge 4s ease-in-out infinite;
+  font-size:1.1rem; letter-spacing:.5rem; color:var(--lavender);
+  display:block; margin-bottom:1rem; animation:floatBadge 4s ease-in-out infinite;
 }
 .footer-text {
-  font-family:'Lora',serif;
-  font-style:italic;
-  font-size:1.15rem;
-  color:var(--text-soft);
+  font-family:'Lora',serif; font-style:italic;
+  font-size:1.15rem; color:var(--text-soft);
+}
+body.ar .footer-text {
+  font-family: 'Cairo', sans-serif;
+  font-style: normal; font-weight: 600;
 }
 .footer-sub {
-  font-size:.78rem;
-  color:var(--text-mute);
-  margin-top:.5rem;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  font-weight:700;
+  font-size:.78rem; color:var(--text-mute); margin-top:.5rem;
+  letter-spacing:.05em; text-transform:uppercase; font-weight:700;
 }
+body.ar .footer-sub { letter-spacing: 0; text-transform: none; font-size: 0.85rem; }
 
-.footer-blobs {
-  position:absolute;
-  inset:0; pointer-events:none;
-}
-.footer-blobs span {
-  position:absolute;
-  border-radius:50%;
-  filter:blur(40px);
-  opacity:.12;
-}
-.footer-blobs .fb1 { width:200px;height:200px;background:var(--pink);    top:-80px; left:10%; }
-.footer-blobs .fb2 { width:160px;height:160px;background:var(--lavender);bottom:-60px; right:15%; }
+.footer-blobs { position:absolute; inset:0; pointer-events:none; }
+.footer-blobs span { position:absolute; border-radius:50%; filter:blur(40px); opacity:.12; }
+.footer-blobs .fb1 { width:200px;height:200px;background:var(--pink);top:-80px;left:10%; }
+.footer-blobs .fb2 { width:160px;height:160px;background:var(--lavender);bottom:-60px;right:15%; }
 
 /* ════════ SCROLL-to-top ════════ */
 #scrollTop {
@@ -733,24 +756,25 @@ footer {
   color:white; font-size:1.1rem;
   display:flex; align-items:center; justify-content:center;
   cursor:pointer;
-  box-shadow: 0 4px 20px rgba(180,140,240,.4);
-  transition:transform .25s ease, box-shadow .25s ease;
-  opacity:0;
+  box-shadow:0 4px 20px rgba(180,140,240,.4);
+  transition:transform .25s ease, box-shadow .25s ease; opacity:0;
 }
+body.ar #scrollTop { right: auto; left: 2rem; }
 #scrollTop.show { opacity:1; }
 #scrollTop:hover { transform:scale(1.12) translateY(-2px); box-shadow:0 8px 28px rgba(180,140,240,.5); }
 
 /* ════════ RESPONSIVE ════════ */
 @media (max-width:900px) {
-  .tools-grid        { grid-template-columns:1fr; }
-  .weeks-grid        { grid-template-columns:1fr; }
-  .principles-grid   { grid-template-columns:repeat(2,1fr); }
+  .tools-grid      { grid-template-columns:1fr; }
+  .weeks-grid      { grid-template-columns:1fr; }
+  .principles-grid { grid-template-columns:repeat(2,1fr); }
 }
 @media (max-width:600px) {
   section { padding:3.5rem 0; }
   .hero-title { font-size:2.2rem; }
   .principles-grid { grid-template-columns:1fr; }
-  .hero-stats { gap:0.75rem; }
+  .hero-stats { gap:.75rem; }
+  .motiv-card { padding:2.5rem 1.8rem; }
 }
 </style>
 </head>
@@ -761,6 +785,12 @@ footer {
 
 <!-- Progress bar -->
 <div id="progress-bar"></div>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+  <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" id="btnAR" onclick="setLang('ar')">AR</button>
+</div>
 
 <!-- BG blobs -->
 <div class="blob-layer">
@@ -777,24 +807,44 @@ footer {
 <!-- ════ HERO ════ -->
 <section id="hero">
   <div class="hero-inner">
-    <div class="hero-badge anim d1"><span class="dot"></span> Personal Learning Dashboard · Month 1</div>
+    <div class="hero-badge anim d1">
+      <span class="dot"></span>
+      <span class="en-content">Personal Learning Dashboard · Month 1</span>
+      <span class="ar-content">لوحة التعلم الشخصية · الشهر الأول</span>
+    </div>
 
     <h1 class="hero-title anim d2">
-      English Speaking<br>
-      <span class="highlight">Development Plan</span>
+      <span class="en-content">English Speaking<br><span class="highlight">Development Plan</span></span>
+      <span class="ar-content">خطة تطوير<br><span class="highlight">مهارات التحدث بالإنجليزية</span></span>
     </h1>
 
-    <p class="hero-month anim d3">From Good to Confident &amp; Natural</p>
+    <p class="hero-month anim d3">
+      <span class="en-content">From Good to Confident &amp; Natural</span>
+      <span class="ar-content">من كويس… لـ واثق وطبيعي</span>
+    </p>
 
     <p class="hero-obj anim d4">
-      To move from a good speaking level to a confident, natural, and professional English speaker by refining pronunciation, improving fluency, and enhancing natural expression.
+      <span class="en-content">To move from a good speaking level to a confident, natural, and professional English speaker by refining pronunciation, improving fluency, and enhancing natural expression.</span>
+      <span class="ar-content">إحنا مش بنبدأ من الصفر، حضرتك بتتكلمي إنجليزي كويس فعلًا 👌 بس الفكرة إننا نعمل نقلة مستوى… نخليه أريح، أسرع، وطبيعي أكتر.</span>
     </p>
 
     <div class="hero-stats anim d5">
-      <div class="stat-pill"><span class="icon">📅</span> 4 Weeks</div>
-      <div class="stat-pill"><span class="icon">🛠️</span> 3 Tools</div>
-      <div class="stat-pill"><span class="icon">🎯</span> 4 Principles</div>
-      <div class="stat-pill"><span class="icon">✨</span> Daily Practice</div>
+      <div class="stat-pill"><span class="icon">📅</span>
+        <span class="en-content">4 Weeks</span>
+        <span class="ar-content">٤ أسابيع</span>
+      </div>
+      <div class="stat-pill"><span class="icon">🛠️</span>
+        <span class="en-content">3 Tools</span>
+        <span class="ar-content">٣ أدوات</span>
+      </div>
+      <div class="stat-pill"><span class="icon">🎯</span>
+        <span class="en-content">4 Principles</span>
+        <span class="ar-content">٤ مبادئ</span>
+      </div>
+      <div class="stat-pill"><span class="icon">✨</span>
+        <span class="en-content">Daily Practice</span>
+        <span class="ar-content">تدريب يومي</span>
+      </div>
     </div>
   </div>
 </section>
@@ -803,31 +853,59 @@ footer {
 <section id="tools">
   <div class="container">
     <div class="anim d1">
-      <span class="chip">🛠 Your Arsenal</span>
-      <h2 class="sec-title">Main <span>Tools</span></h2>
-      <p class="sec-sub">Three powerful companions for your speaking journey — each with a distinct superpower.</p>
+      <span class="chip">
+        <span class="en-content">🛠 Your Arsenal</span>
+        <span class="ar-content">🛠 أدواتك</span>
+      </span>
+      <h2 class="sec-title">
+        <span class="en-content">Main <span>Tools</span></span>
+        <span class="ar-content">هنستخدم <span>إيه؟</span></span>
+      </h2>
+      <p class="sec-sub">
+        <span class="en-content">Three powerful companions for your speaking journey — each with a distinct superpower.</span>
+        <span class="ar-content">تلات أدوات قوية مع بعض في رحلتك — كل واحدة عندها سلاحها الخاص.</span>
+      </p>
     </div>
     <div class="tools-grid">
 
       <div class="tool-card elsa anim d2">
         <div class="tool-icon-wrap">🎙️</div>
-        <div class="tool-tag">Pronunciation</div>
+        <div class="tool-tag">
+          <span class="en-content">Pronunciation</span>
+          <span class="ar-content">النطق</span>
+        </div>
         <h3 class="tool-name">ELSA Speak</h3>
-        <p class="tool-desc">Accent refinement, pronunciation accuracy, sentence stress, and intonation. Your daily precision instrument for phonetic mastery and clarity.</p>
+        <p class="tool-desc">
+          <span class="en-content">Accent refinement, pronunciation accuracy, sentence stress, and intonation. Your daily precision instrument for phonetic mastery and clarity.</span>
+          <span class="ar-content">ده مدرب النطق بتاعنا. هنستخدمه عشان الصوت يبقى أفضل، الحروف تبقى واضحة، ونغمة الجملة تبقى طبيعية مش مكسّرة.</span>
+        </p>
+        <p class="tool-note">📌 مش معناه إن نطقك وحش دلوقتي… بالعكس تؤتؤ</p>
       </div>
 
       <div class="tool-card chat anim d3">
         <div class="tool-icon-wrap">💬</div>
-        <div class="tool-tag">Conversation</div>
+        <div class="tool-tag">
+          <span class="en-content">Conversation</span>
+          <span class="ar-content">المحادثة</span>
+        </div>
         <h3 class="tool-name">ChatGPT</h3>
-        <p class="tool-desc">Natural conversation practice, fluency evaluation, and expression enhancement. A patient, always-available coach that never judges your mistakes.</p>
+        <p class="tool-desc">
+          <span class="en-content">Natural conversation practice, fluency evaluation, and expression enhancement. A patient, always-available coach that never judges your mistakes.</span>
+          <span class="ar-content">ده شريك الكلام… الصديق الصدوق. نتكلم معاه براحتنا، وبعد ما نخلص هو يقول: الجملة دي ممكن تتقال أحسن كده — بس من غير ما يقاطعنا.</span>
+        </p>
       </div>
 
       <div class="tool-card youg anim d4">
         <div class="tool-icon-wrap">🎧</div>
-        <div class="tool-tag">Real Context</div>
+        <div class="tool-tag">
+          <span class="en-content">Real Context</span>
+          <span class="ar-content">السياق الحقيقي</span>
+        </div>
         <h3 class="tool-name">YouGlish</h3>
-        <p class="tool-desc">Listening to real-life pronunciation in authentic contexts. Hear how native speakers actually use words — in the wild, not in a textbook.</p>
+        <p class="tool-desc">
+          <span class="en-content">Listening to real-life pronunciation in authentic contexts. Hear how native speakers actually use words — in the wild, not in a textbook.</span>
+          <span class="ar-content">لو كلمة حسيناها غريبة أو مش واثقين منها، نكتبها ونسمعها في فيديوهات حقيقية. نسمع الإحساس والنغمة، مش الحروف بس.</span>
+        </p>
       </div>
 
     </div>
@@ -838,9 +916,18 @@ footer {
 <section id="weekly">
   <div class="container">
     <div class="anim d1">
-      <span class="chip">🗓 The Roadmap</span>
-      <h2 class="sec-title">Four-Week <span>Plan</span></h2>
-      <p class="sec-sub">Each week builds on the last — from the sounds you make to the presence you project.</p>
+      <span class="chip">
+        <span class="en-content">🗓 The Roadmap</span>
+        <span class="ar-content">🗓 تقسيم الشهر</span>
+      </span>
+      <h2 class="sec-title">
+        <span class="en-content">Four-Week <span>Plan</span></span>
+        <span class="ar-content">خطة <span>الأربع أسابيع</span></span>
+      </h2>
+      <p class="sec-sub">
+        <span class="en-content">Each week builds on the last — from the sounds you make to the presence you project.</span>
+        <span class="ar-content">كل أسبوع بيبني على اللي قبله — من الصوت للثقة للاحترافية.</span>
+      </p>
     </div>
 
     <div class="weeks-grid">
@@ -848,52 +935,124 @@ footer {
       <div class="week-card wk1 anim d2">
         <div class="week-deco"></div>
         <div class="week-deco-2"></div>
-        <div class="week-num-badge">Week 1</div>
-        <h3 class="week-title">Accent &amp; Pronunciation Refinement</h3>
+        <div class="week-num-badge">
+          <span class="en-content">Week 1</span>
+          <span class="ar-content">الأسبوع الأول</span>
+        </div>
+        <h3 class="week-title">
+          <span class="en-content">Accent &amp; Pronunciation Refinement</span>
+          <span class="ar-content">نظبط الصوت 🎙️</span>
+        </h3>
         <ul class="week-ul">
-          <li>Focus on sentence stress and word stress</li>
-          <li>Practice connected speech and natural rhythm</li>
-          <li>Repeat ELSA exercises until achieving higher accuracy scores</li>
-          <li>Apply shadowing technique using short audio clips</li>
+          <li>
+            <span class="en-content">Focus on sentence stress and word stress</span>
+            <span class="ar-content">نركز على النطق والنغمة</span>
+          </li>
+          <li>
+            <span class="en-content">Practice connected speech and natural rhythm</span>
+            <span class="ar-content">نخلي الكلام أهدى وأوضح وأقل تكسّر</span>
+          </li>
+          <li>
+            <span class="en-content">Repeat ELSA exercises until achieving higher accuracy scores</span>
+            <span class="ar-content">نقلد الجمل بإحساس — نحسها مش نقراها</span>
+          </li>
+          <li>
+            <span class="en-content">Apply shadowing technique using short audio clips</span>
+            <span class="ar-content">نستخدم تقنية الـ Shadowing مع كليبات قصيرة</span>
+          </li>
         </ul>
       </div>
 
       <div class="week-card wk2 anim d3">
         <div class="week-deco"></div>
         <div class="week-deco-2"></div>
-        <div class="week-num-badge">Week 2</div>
-        <h3 class="week-title">Natural Expressions &amp; Advanced Vocabulary</h3>
+        <div class="week-num-badge">
+          <span class="en-content">Week 2</span>
+          <span class="ar-content">الأسبوع التاني</span>
+        </div>
+        <h3 class="week-title">
+          <span class="en-content">Natural Expressions &amp; Advanced Vocabulary</span>
+          <span class="ar-content">نخلّي الكلام أشيك ✨</span>
+        </h3>
         <ul class="week-ul">
-          <li>Replace basic expressions with more natural alternatives</li>
-          <li>Practice idiomatic expressions and phrasal verbs</li>
-          <li>Use ChatGPT to generate multiple ways to say the same sentence</li>
-          <li>Focus on sounding less translated and more spontaneous</li>
+          <li>
+            <span class="en-content">Replace basic expressions with more natural alternatives</span>
+            <span class="ar-content">نستبدل الجمل العادية بتعبيرات أقوى شوية</span>
+          </li>
+          <li>
+            <span class="en-content">Practice idiomatic expressions and phrasal verbs</span>
+            <span class="ar-content">نتعلم تعبيرات اصطلاحية وأفعال مركبة</span>
+          </li>
+          <li>
+            <span class="en-content">Use ChatGPT to generate multiple ways to say the same sentence</span>
+            <span class="ar-content">نقلل الترجمة من العربي ونفكر بالإنجليزي أكتر</span>
+          </li>
+          <li>
+            <span class="en-content">Focus on sounding less translated and more spontaneous</span>
+            <span class="ar-content">نستخدم ChatGPT نطلب منه أكتر من طريقة لنفس الجملة</span>
+          </li>
         </ul>
       </div>
 
       <div class="week-card wk3 anim d4">
         <div class="week-deco"></div>
         <div class="week-deco-2"></div>
-        <div class="week-num-badge">Week 3</div>
-        <h3 class="week-title">Speaking Under Pressure</h3>
+        <div class="week-num-badge">
+          <span class="en-content">Week 3</span>
+          <span class="ar-content">الأسبوع التالت</span>
+        </div>
+        <h3 class="week-title">
+          <span class="en-content">Speaking Under Pressure</span>
+          <span class="ar-content">الكلام تحت ضغط 🔥</span>
+        </h3>
         <ul class="week-ul">
-          <li>Practice responding to unexpected topics</li>
-          <li>Deliver 2–3 minute spontaneous speeches</li>
-          <li>Improve clarity while speaking continuously</li>
-          <li>Use ChatGPT for fluency and naturalness evaluation</li>
+          <li>
+            <span class="en-content">Practice responding to unexpected topics</span>
+            <span class="ar-content">موضوع فجأة؟ يلا نتكلم — من غير توقف كتير</span>
+          </li>
+          <li>
+            <span class="en-content">Deliver 2–3 minute spontaneous speeches</span>
+            <span class="ar-content">خطاب عفوي من 2 لـ 3 دقائق</span>
+          </li>
+          <li>
+            <span class="en-content">Improve clarity while speaking continuously</span>
+            <span class="ar-content">المهم نكمل… حتى لو فيه لخبطة بسيطة</span>
+          </li>
+          <li>
+            <span class="en-content">Use ChatGPT for fluency and naturalness evaluation</span>
+            <span class="ar-content">نستخدم ChatGPT يقيّم الطلاقة والطبيعية</span>
+          </li>
         </ul>
       </div>
 
       <div class="week-card wk4 anim d5">
         <div class="week-deco"></div>
         <div class="week-deco-2"></div>
-        <div class="week-num-badge">Week 4</div>
-        <h3 class="week-title">Professional &amp; Confident Communication</h3>
+        <div class="week-num-badge">
+          <span class="en-content">Week 4</span>
+          <span class="ar-content">الأسبوع الرابع</span>
+        </div>
+        <h3 class="week-title">
+          <span class="en-content">Professional &amp; Confident Communication</span>
+          <span class="ar-content">مستوى احترافي 👑</span>
+        </h3>
         <ul class="week-ul">
-          <li>Deliver structured mini-presentations</li>
-          <li>Practice explaining complex ideas clearly</li>
-          <li>Refine tone and confidence in formal speaking situations</li>
-          <li>Record and compare speaking samples from start to end of month</li>
+          <li>
+            <span class="en-content">Deliver structured mini-presentations</span>
+            <span class="ar-content">نعمل عرض صغير منظم ومرتب</span>
+          </li>
+          <li>
+            <span class="en-content">Practice explaining complex ideas clearly</span>
+            <span class="ar-content">نشرح فكرة معقدة بشكل واضح وسهل</span>
+          </li>
+          <li>
+            <span class="en-content">Refine tone and confidence in formal speaking situations</span>
+            <span class="ar-content">ندير نقاش ونحسّن النبرة والثقة في المواقف الرسمية</span>
+          </li>
+          <li>
+            <span class="en-content">Record and compare speaking samples from start to end of month</span>
+            <span class="ar-content">نسجّل في أول الأسبوع وآخره ونستمتع بالفرق 👏</span>
+          </li>
         </ul>
       </div>
 
@@ -905,38 +1064,71 @@ footer {
 <section id="principles">
   <div class="container">
     <div class="anim d1" style="text-align:center; max-width:560px; margin:0 auto 3rem;">
-      <span class="chip">💡 The Foundation</span>
-      <h2 class="sec-title">Key <span>Principles</span></h2>
-      <p class="sec-sub" style="margin:0 auto;">Hold these close throughout the month — they're your compass, not just rules.</p>
+      <span class="chip">
+        <span class="en-content">💡 The Foundation</span>
+        <span class="ar-content">💡 أهم قواعد الشهر</span>
+      </span>
+      <h2 class="sec-title">
+        <span class="en-content">Key <span>Principles</span></span>
+        <span class="ar-content">المبادئ <span>الأساسية</span></span>
+      </h2>
+      <p class="sec-sub" style="margin:0 auto;">
+        <span class="en-content">Hold these close throughout the month — they're your compass, not just rules.</span>
+        <span class="ar-content">احتفظي بيهم طول الشهر — دول بوصلتك، مش مجرد قواعد.</span>
+      </p>
     </div>
     <div class="principles-grid">
 
       <div class="prin-card anim d2">
         <span class="prin-num">01</span>
         <span class="prin-emoji">🌱</span>
-        <h4 class="prin-title">Embrace Mistakes</h4>
-        <p class="prin-desc">Mistakes are part of the process — improvement comes from correction, not avoidance.</p>
+        <h4 class="prin-title">
+          <span class="en-content">Embrace Mistakes</span>
+          <span class="ar-content">مفيش Perfect</span>
+        </h4>
+        <p class="prin-desc">
+          <span class="en-content">Mistakes are part of the process — improvement comes from correction, not avoidance.</span>
+          <span class="ar-content">مفيش توتر. فيه تجربة وغلط وتحسّن وثقة بتزيد واحدة واحدة.</span>
+        </p>
       </div>
 
       <div class="prin-card anim d3">
         <span class="prin-num">02</span>
         <span class="prin-emoji">🔥</span>
-        <h4 class="prin-title">Consistency Wins</h4>
-        <p class="prin-desc">Consistency is more important than perfection. Show up every day, even for ten minutes.</p>
+        <h4 class="prin-title">
+          <span class="en-content">Consistency Wins</span>
+          <span class="ar-content">الاستمرارية</span>
+        </h4>
+        <p class="prin-desc">
+          <span class="en-content">Consistency is more important than perfection. Show up every day, even for ten minutes.</span>
+          <span class="ar-content">الاستمرارية أهم من الكمال. اظهري كل يوم، حتى لو عشر دقايق بس.</span>
+        </p>
       </div>
 
       <div class="prin-card anim d4">
         <span class="prin-num">03</span>
         <span class="prin-emoji">🎯</span>
-        <h4 class="prin-title">Clarity First</h4>
-        <p class="prin-desc">Focus on clarity, confidence, and natural delivery — not impressive vocabulary alone.</p>
+        <h4 class="prin-title">
+          <span class="en-content">Clarity First</span>
+          <span class="ar-content">الوضوح أولاً</span>
+        </h4>
+        <p class="prin-desc">
+          <span class="en-content">Focus on clarity, confidence, and natural delivery — not impressive vocabulary alone.</span>
+          <span class="ar-content">مش عايزين قواعد أكتر. مش عايزين حفظ. عايزين الكلام يبقى لايت وواثق.</span>
+        </p>
       </div>
 
       <div class="prin-card anim d5">
         <span class="prin-num">04</span>
         <span class="prin-emoji">🤝</span>
-        <h4 class="prin-title">AI as Coach</h4>
-        <p class="prin-desc">Use AI as a coach, not a replacement for practice. The speaking must always be yours.</p>
+        <h4 class="prin-title">
+          <span class="en-content">AI as Coach</span>
+          <span class="ar-content">AI مدرب مش بديل</span>
+        </h4>
+        <p class="prin-desc">
+          <span class="en-content">Use AI as a coach, not a replacement for practice. The speaking must always be yours.</span>
+          <span class="ar-content">الـ AI بيساعدك تتحسني، بس الكلام لازم يبقى بتاعك إنتِ دايمًا.</span>
+        </p>
       </div>
 
     </div>
@@ -945,7 +1137,6 @@ footer {
 
 <!-- ════ MOTIVATION ════ -->
 <section id="motivation">
-  <!-- Floating sparkles -->
   <span class="sparkle">✨</span>
   <span class="sparkle">🌸</span>
   <span class="sparkle">💫</span>
@@ -957,7 +1148,6 @@ footer {
       <div class="motiv-card">
         <div class="motiv-blob-2"></div>
 
-        <!-- Animated hearts -->
         <div class="hearts-row">
           <span class="heart">🤍</span>
           <span class="heart">🌸</span>
@@ -966,36 +1156,53 @@ footer {
           <span class="heart">🤍</span>
         </div>
 
-        <!-- Name -->
-        <h2 class="motiv-name">Mrs. Ashgan</h2>
+        <h2 class="motiv-name">
+          <span class="en-content">Mrs. Ashgan</span>
+          <span class="ar-content">مس أشجان 🤍</span>
+        </h2>
 
-        <!-- Separator -->
         <div class="motiv-sep">
           <span class="motiv-sep-line"></span>
           <span class="motiv-sep-star">✦</span>
           <span class="motiv-sep-line right"></span>
         </div>
 
-        <!-- Message lines -->
         <div class="motiv-lines">
-          <p class="motiv-line">
+          <p class="motiv-line en-content">
             Language isn't just words we say… it's <span class="glow">confidence, energy,</span> and the way we connect ourselves to the world.
           </p>
-          <p class="motiv-line">
+          <p class="motiv-line ar-content">
+            اللغة مش مجرد كلمات بنقولها… دي <span class="glow">ثقة وطاقة</span> وطريقة بنوصل بيها نفسنا للعالم.
+          </p>
+
+          <p class="motiv-line en-content">
             You already have a <span class="glow">solid foundation,</span> and all you need is a touch of development to make your speech <span class="glow">smoother, stronger, and more natural.</span>
           </p>
-          <p class="motiv-line">
+          <p class="motiv-line ar-content">
+            حضرتك عندك <span class="glow">أساس كويس فعلًا،</span> وكل اللي محتاجينه بس لمسة تطوير تخلي كلامك <span class="glow">أريح وأقوى وطبيعي أكتر.</span>
+          </p>
+
+          <p class="motiv-line en-content">
             This growth isn't about being <span class="glow">"perfect,"</span> but about feeling <span class="glow">comfortable</span> when you speak — without hesitation or overthinking.
           </p>
-          <p class="motiv-line">
+          <p class="motiv-line ar-content">
+            التطور هنا مش عشان تبقي <span class="glow">"مثالية"،</span> لكن عشان تبقي <span class="glow">مرتاحة</span> وإنتِ بتتكلمي — من غير تردد ولا تفكير زيادة.
+          </p>
+
+          <p class="motiv-line en-content">
             A <span class="glow">small step each day</span> will make a huge difference over time… and you'll be surprised at how much clearer your voice becomes and how much stronger your confidence feels.
+          </p>
+          <p class="motiv-line ar-content">
+            <span class="glow">خطوة صغيرة كل يوم</span> هتعمل فرق كبير جدًا بعد فترة… وهتتفاجئي قد إيه صوتك ونطقك بقى أوضح وثقتك أعلى.
           </p>
         </div>
 
-        <!-- Closing note -->
         <div class="motiv-closing">
-          <p class="motiv-closing-text">
+          <p class="motiv-closing-text en-content">
             It's not difficult… it just needs a <strong>decision</strong> and <strong>consistency,</strong> and the rest will come naturally 🌷
+          </p>
+          <p class="motiv-closing-text ar-content">
+            الموضوع مش صعب… هو بس محتاج <strong>قرار</strong> و<strong>استمرارية،</strong> والباقي هييجي لوحده ✨
           </p>
         </div>
 
@@ -1011,8 +1218,14 @@ footer {
     <span class="fb2"></span>
   </div>
   <span class="footer-stars">✦ ✦ ✦</span>
-  <p class="footer-text">"Built for growth. One month at a time."</p>
-  <p class="footer-sub">English Speaking Development Plan · Month 1</p>
+  <p class="footer-text">
+    <span class="en-content">"Built for growth. One month at a time."</span>
+    <span class="ar-content">"مبنية للتطوير. أسبوع بعد أسبوع."</span>
+  </p>
+  <p class="footer-sub">
+    <span class="en-content">English Speaking Development Plan · Month 1</span>
+    <span class="ar-content">خطة تطوير التحدث بالإنجليزية · الشهر الأول</span>
+  </p>
 </footer>
 
 <script>
@@ -1038,6 +1251,28 @@ footer {
   window.addEventListener('scroll', () => {
     btn.classList.toggle('show', window.scrollY > 400);
   });
+
+  // Language toggle
+  function setLang(lang) {
+    const body = document.body;
+    const btnEN = document.getElementById('btnEN');
+    const btnAR = document.getElementById('btnAR');
+    const html  = document.documentElement;
+
+    if (lang === 'ar') {
+      body.classList.add('ar');
+      html.setAttribute('lang', 'ar');
+      html.setAttribute('dir', 'rtl');
+      btnAR.classList.add('active');
+      btnEN.classList.remove('active');
+    } else {
+      body.classList.remove('ar');
+      html.setAttribute('lang', 'en');
+      html.setAttribute('dir', 'ltr');
+      btnEN.classList.add('active');
+      btnAR.classList.remove('active');
+    }
+  }
 </script>
 </body>
 </html>
